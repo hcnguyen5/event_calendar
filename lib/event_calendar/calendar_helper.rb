@@ -205,12 +205,10 @@ module EventCalendar
               if dates[0] == day.to_date
                 # check if we should display the bg color or not
                 no_bg = no_event_bg?(event, options)
-                class_name =
-                  if options[:class_name]
-                    options[:class_name].call(event)
-                  else
-                    event.class.name.tableize.singularize
-                  end
+                class_name = event.class.name.tableize.singularize
+                if options[:class_name]
+                  options[:class_name].call(event, class_name)
+                end
 
                 cal << %(<td class="ec-event-cell" colspan="#{(dates[1]-dates[0]).to_i + 1}" )
                 cal << %(style="padding-top: #{options[:event_margin]}px;">)
