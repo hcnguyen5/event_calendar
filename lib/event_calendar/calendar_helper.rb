@@ -71,8 +71,6 @@ module EventCalendar
         :event_margin => 1,
         :event_padding_top => 2,
 
-        :class_name => nil,
-
         :use_all_day => false,
         :use_javascript => true,
         :link_to_day_action => false
@@ -207,7 +205,7 @@ module EventCalendar
                 no_bg = no_event_bg?(event, options)
                 class_name = event.class.name.tableize.singularize
                 if options[:class_name]
-                  options[:class_name].call(event, class_name)
+                  class_name = options[:class_name].call(event, class_name)
                 end
 
                 cal << %(<td class="ec-event-cell" colspan="#{(dates[1]-dates[0]).to_i + 1}" )
